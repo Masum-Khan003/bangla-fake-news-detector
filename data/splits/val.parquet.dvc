@@ -1,0 +1,5 @@
+outs:
+- md5: f3fa85498c4e195c77f3126877289a03
+  size: 23525628
+  hash: md5
+  path: val.parquet

@@ -1,0 +1,23 @@
+{
+  "train": {
+    "n_rows": 36322,
+    "n_fake": 906,
+    "n_credible": 35416,
+    "fake_pct": 2.49,
+    "needs_chunking_pct": 56.51
+  },
+  "val": {
+    "n_rows": 7783,
+    "n_fake": 194,
+    "n_credible": 7589,
+    "fake_pct": 2.49,
+    "needs_chunking_pct": 54.27
+  },
+  "test": {
+    "n_rows": 7784,
+    "n_fake": 195,
+    "n_credible": 7589,
+    "fake_pct": 2.51,
+    "needs_chunking_pct": 56.53
+  }
+}
