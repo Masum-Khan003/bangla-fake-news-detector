@@ -1,0 +1,50 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.so
+
+# Data (tracked by DVC, not git)
+data/raw/
+data/processed/
+data/external/
+*.parquet
+*.csv
+*.tsv
+
+# Model weights (tracked by HF Hub, not git)
+*.bin
+*.safetensors
+*.onnx
+*.pt
+*.pth
+checkpoints/
+
+# Secrets
+.env
+*.env.local
+
+# Calibration outputs (committed after training)
+# calibration/ is tracked
+
+# Logs
+*.log
+wandb/
+mlruns/
+
+# OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Docker
+*.tar
+
+# Node
+node_modules/
+extension/dist/

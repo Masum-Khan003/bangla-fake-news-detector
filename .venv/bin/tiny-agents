@@ -1,0 +1,6 @@
+#!/home/mak/_project/B_Fake_News_Detector/bangla-fake-news-detector/.venv/bin/python3.10
+import sys
+from huggingface_hub.inference._mcp.cli import app
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(app())
