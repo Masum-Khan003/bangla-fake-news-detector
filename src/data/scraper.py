@@ -287,11 +287,11 @@ def scrape_batch(url_label_pairs: list[tuple[str, int]],
 # label=1 : established, reputable Bangla news outlets
 # label=0 : known low-credibility portals (use with caution)
 CREDIBLE_SEED_URLS = [
-    "https://www.prothomalo.com/bangladesh",
-    "https://www.prothomalo.com/politics",
-    "https://www.thedailystar.net/bangla/news",
-    "https://bdnews24.com/bangla",
-    "https://www.tbsnews.net/bangla",
+    # prothomalo.com  — robots.txt disallows (confirmed 2025-05)
+    # bdnews24.com    — robots.txt disallows (confirmed 2025-05)
+    # Add sites confirmed allowed by robots.txt check
+    "https://www.thedailystar.net/news/bangladesh",
+    "https://www.tbsnews.net/bangladesh",
     "https://www.dhakatribune.com/bangladesh",
 ]
 
