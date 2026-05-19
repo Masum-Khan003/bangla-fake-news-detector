@@ -1,0 +1,6 @@
+outs:
+- md5: b3a88b5df5b89f672265e3becbb9ef79.dir
+  size: 3447154
+  nfiles: 10
+  hash: md5
+  path: liar

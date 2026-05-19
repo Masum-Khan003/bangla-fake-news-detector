@@ -1,5 +1,5 @@
 # Python
-venv/
+.venv/
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -9,7 +9,8 @@ build/
 *.so
 
 # Data (tracked by DVC, not git)
-data/raw/
+!data/**/*.dvc
+data/raw/banfakenews/
 data/processed/
 data/external/
 *.parquet

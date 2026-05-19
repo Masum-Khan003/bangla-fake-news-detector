@@ -1,0 +1,6 @@
+outs:
+- md5: 81dec3ae9aedbdb8ab7c84767d08092b.dir
+  size: 291255631
+  nfiles: 4
+  hash: md5
+  path: banfakenews
