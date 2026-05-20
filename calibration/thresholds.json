@@ -1,0 +1,11 @@
+{
+  "threshold_fake": 0.05,
+  "threshold_credible": 0.95,
+  "rationale": "0.05 chosen over scipy-optimal 0.0135: gains only 1 extra true positive vs 42 fewer false positives",
+  "fake_precision_at_threshold": 0.9066,
+  "fake_recall_at_threshold":    0.8462,
+  "fake_f1_at_threshold":        0.8753,
+  "macro_f1_at_threshold":       0.9361,
+  "wandb_run_id": "g9qn9beq",
+  "hf_repo": "maksays-003/bangla-fake-news-xlmr"
+}

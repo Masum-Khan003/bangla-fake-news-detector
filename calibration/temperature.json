@@ -1,0 +1,4 @@
+{
+  "temperature": 0.5308,
+  "note": "T < 1.0 = model was underconfident due to heavy class weighting (20x Fake weight)"
+}
