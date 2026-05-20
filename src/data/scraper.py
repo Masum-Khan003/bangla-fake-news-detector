@@ -287,13 +287,17 @@ def scrape_batch(url_label_pairs: list[tuple[str, int]],
 # label=1 : established, reputable Bangla news outlets
 # label=0 : known low-credibility portals (use with caution)
 CREDIBLE_SEED_URLS = [
-    # prothomalo.com  — robots.txt disallows (confirmed 2025-05)
-    # bdnews24.com    — robots.txt disallows (confirmed 2025-05)
-    # Add sites confirmed allowed by robots.txt check
-    "https://www.thedailystar.net/news/bangladesh",
-    "https://www.tbsnews.net/bangladesh",
-    "https://www.dhakatribune.com/bangladesh",
+    # Verified: robots.txt ✓ allowed + HTTP 200 (checked 2025-05)
+    "https://www.thedailystar.net/news/bangladesh",   # English BD news
+    "https://samakal.com/bangladesh",                  # Bangla news
+    # All others disallowed by robots.txt — do not add without re-checking
 ]
+
+# NOTE: Scraping deferred — both allowed sites are credible-only.
+# Adding only credible samples worsens 39:1 imbalance further.
+# Resume scraping when fake news sources with permissive robots.txt
+# are identified, or when Rumor Scanner data sharing is confirmed.
+
 
 
 if __name__ == "__main__":
