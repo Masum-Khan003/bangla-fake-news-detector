@@ -49,3 +49,4 @@ mlruns/
 # Node
 node_modules/
 extension/dist/
+models/
