@@ -1,0 +1,4 @@
+# CPU-only PyTorch — must be installed BEFORE requirements-prod.txt
+# Prevents pip from pulling CUDA torch from PyPI
+--index-url https://download.pytorch.org/whl/cpu
+torch==2.3.1+cpu
