@@ -14,6 +14,9 @@ const SITE_SELECTORS = {
   "jugantor.com":     ".news-details p",
   "ittefaq.com.bd":   ".news-details-content p",
   "risingbd.com":     ".full-details p",
+  "mzamin.com":        ".prose p",
+  "dhakapost.com":     ".news-details p",
+  "dailyamardesh.com": ".block-full_richtext p",
 };
 
 const BADGE_ID       = "bfnd-verdict-badge";
@@ -258,4 +261,40 @@ function startWithRetry() {
   }, RETRY_DELAY_MS);
 }
 
+// ── Navigation detection for SPA sites ───────────────────
+// News sites use React/Next.js — no full page reload on navigation.
+// We watch for URL changes and re-analyze on each new article.
+
+let lastUrl = window.location.href;
+
+function resetAndAnalyze() {
+  const existing = document.getElementById(BADGE_ID);
+  if (existing) existing.remove();
+  analysisStarted = false;
+  startWithRetry();
+}
+
+// Method 1: popstate (back/forward navigation)
+window.addEventListener("popstate", () => {
+  setTimeout(resetAndAnalyze, 500);
+});
+
+// Method 2: Poll for URL change every 1s (handles link clicks)
+setInterval(() => {
+  const currentUrl = window.location.href;
+  if (currentUrl !== lastUrl) {
+    lastUrl = currentUrl;
+    setTimeout(resetAndAnalyze, 1000);
+  }
+}, 1000);
+
+// Method 3: Intercept history.pushState
+const originalPushState = history.pushState.bind(history);
+history.pushState = function(...args) {
+  originalPushState(...args);
+  lastUrl = window.location.href;
+  setTimeout(resetAndAnalyze, 1000);
+};
+
+// Initial run
 startWithRetry();

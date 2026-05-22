@@ -4,32 +4,33 @@
   "version": "1.0.0",
   "description": "Detects fake news in Bangla and English articles using AI. Supports major Bangladeshi news portals.",
   "minimum_chrome_version": "109",
-
   "permissions": [
     "activeTab",
     "storage",
     "scripting"
   ],
-
   "host_permissions": [
-    "https://redis-production-b1ef.up.railway.app/*"
+    "https://redis-production-b1ef.up.railway.app/*",
+    "https://www.mzamin.com/*",
+    "https://mzamin.com/*",
+    "https://www.dhakapost.com/*",
+    "https://dhakapost.com/*",
+    "https://www.dailyamardesh.com/*",
+    "https://dailyamardesh.com/*"
   ],
-
   "background": {
     "service_worker": "background.js",
     "type": "module"
   },
-
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16":  "icons/icon16.png",
-      "48":  "icons/icon48.png",
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
     "default_title": "Bangla Fake News Detector"
   },
-
   "content_scripts": [
     {
       "matches": [
@@ -42,16 +43,23 @@
         "https://www.kalerkantho.com/*",
         "https://www.jugantor.com/*",
         "https://www.ittefaq.com.bd/*",
-        "https://www.risingbd.com/*"
+        "https://www.risingbd.com/*",
+        "https://www.mzamin.com/*",
+        "https://mzamin.com/*",
+        "https://www.dhakapost.com/*",
+        "https://dhakapost.com/*",
+        "https://www.dailyamardesh.com/*",
+        "https://dailyamardesh.com/*"
       ],
-      "js": ["content.js"],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
-
   "icons": {
-    "16":  "icons/icon16.png",
-    "48":  "icons/icon48.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   }
 }
