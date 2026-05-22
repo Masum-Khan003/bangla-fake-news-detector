@@ -6,13 +6,13 @@
 
 // Site-specific CSS selectors for article body text
 const SITE_SELECTORS = {
-  "prothomalo.com":   ".story-element p, .story-element-text p",
-  "thedailystar.net": ".pb-article-body p, .article-body p, .views-row p",
-  "bdnews24.com":     ".article-content p, .pf-content p",
+  "prothomalo.com":   ".story-element-text p, .storyCard p",
+  "thedailystar.net": ".text-formatted p",
+  "bdnews24.com":     ".details-brief p, .dNewsDesc p",
   "tbsnews.net":      ".article-body p, .article-content p",
   "dhakatribune.com": ".article-body p",
-  "samakal.com":      ".content-details p, .news-details p",
-  "kalerkantho.com":  ".news-details p, .detail-body p",
+  "samakal.com":      ".dNewsDesc p",
+  "kalerkantho.com":  ".details-module__Vu_sVW__detailsBody p, .news-details-content p",
   "jugantor.com":     ".news-details p",
   "ittefaq.com.bd":   ".news-details-content p",
   "risingbd.com":     ".full-details p",
@@ -28,7 +28,7 @@ function getDomain() {
 
 function extractArticleText() {
   const domain   = getDomain();
-  const selector = SITE_SELECTORS[domain] || "article p, .article p, main p";
+  const selector = SITE_SELECTORS[domain] || "[class*='text-formatted'] p, [class*='article'] p, article p, main p";
 
   const paragraphs = Array.from(document.querySelectorAll(selector))
     .map(p => p.innerText.trim())
@@ -226,5 +226,12 @@ async function analyzeArticle() {
   }
 }
 
-// Run on page load
+// Run on page load — with retry for slow-rendering sites
+// First attempt immediately, retry after 2s if no text found
 analyzeArticle();
+setTimeout(() => {
+  if (!document.getElementById("bfnd-verdict-badge")) {
+    analyzeArticle();
+  }
+}, 2000);
+
