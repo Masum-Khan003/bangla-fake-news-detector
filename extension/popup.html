@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bangla Fake News Detector</title>
+<link rel="stylesheet" href="popup.css"/>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">🔍</div>
+    <div>
+      <h1>Fake News Detector</h1>
+      <p class="subtitle">Bangla &amp; English</p>
+    </div>
+  </header>
+
+  <div id="result-section" class="hidden">
+    <div id="verdict-box">
+      <div id="verdict-emoji"></div>
+      <div id="verdict-label"></div>
+      <div id="verdict-conf"></div>
+    </div>
+    <div id="confidence-bar-track">
+      <div id="confidence-bar-fill"></div>
+    </div>
+    <div id="meta-info"></div>
+    <div id="feedback-row">
+      <span class="fb-label">Was this correct?</span>
+      <button id="fb-yes">👍 Yes</button>
+      <button id="fb-no">👎 No</button>
+    </div>
+    <div id="fb-thanks" class="hidden">✓ Thank you for the feedback</div>
+  </div>
+
+  <div id="manual-section">
+    <p class="hint">Paste article text to analyze:</p>
+    <textarea id="manual-text" placeholder="Paste Bangla or English article text here (min 200 characters)..." rows="6"></textarea>
+    <button id="analyze-btn">Analyze</button>
+    <div id="loading" class="hidden">Analyzing... this may take 2–3s</div>
+    <div id="error-msg" class="hidden"></div>
+  </div>
+
+  <footer>
+    <a href="https://github.com/maksays/bangla-fake-news-detector" target="_blank">GitHub</a>
+    ·
+    <a href="https://redis-production-b1ef.up.railway.app/docs" target="_blank">API Docs</a>
+    ·
+    <span id="status-dot" title="API Status">●</span>
+  </footer>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>
