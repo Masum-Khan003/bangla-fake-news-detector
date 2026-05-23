@@ -169,6 +169,12 @@ with tab1:
         elif char_count < 200:
             st.warning(f"⚠ {char_count} chars — too short. Min 200 for reliable results.")
         else:
+            if char_count < 500:
+            st.warning(
+                f"⚠️ {char_count} chars — results may be unreliable. "
+                "For best accuracy, provide 500+ characters of full article text."
+            )
+        else:
             st.caption(f"✓ {char_count:,} characters — ready to analyze")
 
         # ── Analyze button ────────────────────────────────
@@ -201,7 +207,14 @@ with tab1:
         result_placeholder = st.empty()
 
         if st.session_state.result is None and st.session_state.error is None:
-            with result_placeholder.container():
+            # Show warning if token count suggests short input
+        if res.get("token_count", 999) < 200 or res.get("warning"):
+            st.warning(
+                "⚠️ **Short text warning:** This result may be unreliable. "
+                "The model needs full article text (500+ characters) to classify accurately. "
+                "Headlines and short snippets almost always return 'Credible' regardless of content."
+            )
+        with result_placeholder.container():
                 st.info(
                     "👈 Load a sample article or paste text, "
                     "then click **Analyze Article**."

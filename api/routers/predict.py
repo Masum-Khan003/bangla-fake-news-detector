@@ -37,6 +37,11 @@ def _build_response(result, request_id: str,
         threshold_applied = predictor.thresh_fake,
         inference_ms      = round(inference_ms, 1),
         model_version     = "maksays-003/bangla-fake-news-xlmr",
+        warning           = (
+            "Input text is short (<500 chars). Results are unreliable for "
+            "headlines or snippets. Provide full article text for accurate predictions."
+            if result.token_count < 200 else None
+        ),
     )
 
 
