@@ -21,7 +21,7 @@
 
 Bangladesh has 2,000+ unregulated online news portals. During elections, health
 crises, and political upheavals, fabricated Bangla-language news spreads virally
-on Facebook and WhatsApp — causing documented real-world harm. Every existing
+on Facebook and WhatsApp causing documented real-world harm. Every existing
 automated detection tool is **English-only**.
 
 This project builds the first open, deployable fake news detector for the
@@ -153,12 +153,12 @@ bangla-fake-news-detector/
 
 ## Known Limitations
 
-- **Binary only** — Fake vs Credible (no Unverified/Satire class yet)
-- **Short texts** — articles under 200 characters are unreliable
-- **Temporal drift** — trained on data up to 2024; misinformation patterns evolve
-- **False negatives** — ~15% of fake articles missed at threshold=0.05
-- **Banglish** — code-switching handled but with lower confidence
-- **BanFakeNews license** — CC BY-NC-SA 4.0 (non-commercial use only)
+- **Binary only** - Fake vs Credible (no Unverified/Satire class yet)
+- **Short texts** - articles under 200 characters are unreliable
+- **Temporal drift** - trained on data up to 2024; misinformation patterns evolve
+- **False negatives** - ~15% of fake articles missed at threshold=0.05
+- **Banglish** - code-switching handled but with lower confidence
+- **BanFakeNews license** - CC BY-NC-SA 4.0 (non-commercial use only)
 
 ---
 
