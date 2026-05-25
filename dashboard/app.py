@@ -168,10 +168,11 @@ with tab1:
             st.caption("0 characters")
         elif char_count < 200:
             st.warning(f"⚠ {char_count} chars — too short. Min 200 for reliable results.")
-        elif char_count < 500:
+        else:
+            if char_count < 500:
             st.warning(
-            f"⚠️ {char_count} chars — results may be unreliable. "
-            "For best accuracy, provide 500+ characters of full article text."
+                f"⚠️ {char_count} chars — results may be unreliable. "
+                "For best accuracy, provide 500+ characters of full article text."
             )
         else:
             st.caption(f"✓ {char_count:,} characters — ready to analyze")
@@ -201,47 +202,23 @@ with tab1:
         )
 
     # ── RIGHT: Result ─────────────────────────────────────
-with right:
-    st.markdown(
-        '<p class="section-header">Result</p>',
-        unsafe_allow_html=True
-    )
+    with right:
+        st.markdown('<p class="section-header">Result</p>', unsafe_allow_html=True)
+        result_placeholder = st.empty()
 
-    result_placeholder = st.empty()
-
-    # No result yet
-    if (
-        st.session_state.result is None
-        and st.session_state.error is None
-    ):
-        with result_placeholder.container():
-            st.info(
-                "👈 Load a sample article or paste text, "
-                "then click **Analyze Article**."
-            )
-
-    # Result exists
-    elif st.session_state.result is not None:
-        res = st.session_state.result
-
-        # Short-text warning
-        if (
-            res.get("token_count", 999) < 200
-            or res.get("warning")
-        ):
+        if st.session_state.result is None and st.session_state.error is None:
+            # Show warning if token count suggests short input
+        if res.get("token_count", 999) < 200 or res.get("warning"):
             st.warning(
                 "⚠️ **Short text warning:** This result may be unreliable. "
-                "The model needs full article text (500+ characters) "
-                "to classify accurately. Headlines and short snippets "
-                "almost always return 'Credible' regardless of content."
+                "The model needs full article text (500+ characters) to classify accurately. "
+                "Headlines and short snippets almost always return 'Credible' regardless of content."
             )
-
         with result_placeholder.container():
-            st.write(res)
-
-    # Error state
-    elif st.session_state.error is not None:
-        st.error(st.session_state.error)
+                st.info(
+                    "👈 Load a sample article or paste text, "
+                    "then click **Analyze Article**."
+                )
 
     # ── API call helper ───────────────────────────────────
     def call_api(endpoint: str, payload: dict) -> None:
