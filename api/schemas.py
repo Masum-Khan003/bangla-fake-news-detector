@@ -87,7 +87,7 @@ class PredictionResponse(BaseModel):
     threshold_applied: float
     inference_ms:      float
     model_version:     str
-    warning:           str | None = None   # shown when input may be unreliable
+    warning:           Optional[str] = None   # shown when input may be unreliable
 
 
 class URLPredictionResponse(PredictionResponse):
