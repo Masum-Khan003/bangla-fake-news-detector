@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deployment summary
+        run: |
+          echo "========================================"
+          echo "Deployment triggered for: ${{ github.sha }}"
+          echo "Commit: ${{ github.event.head_commit.message }}"
+          echo "========================================"
+          echo "Railway deploys automatically via railway up"
+          echo "HuggingFace Spaces deploys via direct upload"
+          echo "No automated deployment configured in this workflow"
+          echo "See README for manual deployment steps"
