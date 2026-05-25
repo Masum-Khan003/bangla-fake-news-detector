@@ -21,19 +21,19 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install fastapi uvicorn pydantic python-dotenv \
-                      slowapi pytest httpx
+                      slowapi pytest httpx redis aiosqlite \
+                      langdetect sqlalchemy ruff
 
       - name: Lint with ruff
         run: |
-          pip install ruff
-          ruff check api/ src/ --ignore E501 || true
+          ruff check api/ src/ --ignore E501,F401 || true
 
-      - name: Test API imports
+      - name: Test imports
         run: |
-          python -c "from api.schemas import PredictionResponse; print('schemas OK')"
-          python -c "from api.auth import require_api_key; print('auth OK')"
-          python -c "from api.cache import cache; print('cache OK')"
-          python -c "from src.utils.label_map import get_class_weight_list; print('label_map OK')"
-          python -c "from src.utils.text_utils import clean_text; print('text_utils OK')"
-          python -c "from src.model.chunker import chunk_text_by_chars; print('chunker OK')"
-          python -c "from src.model.language_detect import detect_language; print('lang_detect OK')"
+          python -c "from api.schemas import PredictionResponse; print('✓ schemas')"
+          python -c "from api.auth import require_api_key; print('✓ auth')"
+          python -c "from api.cache import cache; print('✓ cache')"
+          python -c "from src.utils.label_map import get_class_weight_list; print('✓ label_map')"
+          python -c "from src.utils.text_utils import clean_text; print('✓ text_utils')"
+          python -c "from src.model.chunker import chunk_text_by_chars; print('✓ chunker')"
+          python -c "from src.model.language_detect import detect_language; print('✓ lang_detect')"
