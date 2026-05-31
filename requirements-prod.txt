@@ -7,8 +7,8 @@ python-dotenv==1.2.2
 slowapi==0.1.9
 
 # ── ML Inference (CPU only — torch installed via requirements-cpu.txt) ──
-transformers>=4.47.0
-tokenizers==0.22.2
+transformers==4.46.3
+tokenizers==0.20.3
 safetensors==0.7.0
 sentencepiece==0.2.1
 huggingface_hub==1.15.0
@@ -35,4 +35,4 @@ aiosqlite==0.22.1
 requests==2.34.2
 tqdm==4.67.3
 packaging==26.2
-optimum[onnxruntime]
+optimum[onnxruntime]==1.23.3
