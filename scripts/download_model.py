@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO,
 log = logging.getLogger(__name__)
 
 MODEL_DIR = Path("/app/models/xlmr-bangla-fn")
-HF_REPO   = os.getenv("HF_MODEL_REPO", "maksays-003/bangla-fake-news-xlmr")
+HF_REPO   = os.getenv("HF_MODEL_REPO", "maksays-003/bangla-fake-news-xlmr-onnx")
 HF_TOKEN  = os.getenv("HUGGINGFACE_TOKEN", "")
 
 REQUIRED_FILES = ["config.json", "tokenizer.json", "model.safetensors"]

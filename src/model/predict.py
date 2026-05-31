@@ -16,8 +16,8 @@ from pathlib import Path
 from dataclasses import dataclass
 from scipy.special import softmax
 
-import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from optimum.onnxruntime import ORTModelForSequenceClassification
+from transformers import AutoTokenizer
 
 from src.model.language_detect import detect_language
 from src.model.chunker import chunk_text_by_chars, needs_chunking
@@ -60,9 +60,7 @@ class FakeNewsPredictor:
         self.model       = None
         self.temperature = 1.0
         self.thresh_fake = 0.50
-        self.device      = torch.device(
-            "cuda" if torch.cuda.is_available() else "cpu"
-        )
+        # ONNX Runtime handles device selection automatically
         self._loaded = False
 
     def load(self) -> None:
@@ -71,14 +69,13 @@ class FakeNewsPredictor:
         Call this ONCE at API startup — takes 10–30s.
         """
         log.info(f"Loading model from {self.model_dir}")
-        log.info(f"Device: {self.device}")
+        log.info("Device: CPU (ONNX Runtime)")
 
         self.tokenizer = AutoTokenizer.from_pretrained(str(self.model_dir))
-        self.model     = AutoModelForSequenceClassification.from_pretrained(
-            str(self.model_dir)
+        self.model     = ORTModelForSequenceClassification.from_pretrained(
+            str(self.model_dir),
+            file_name = "model_quantized.onnx",
         )
-        self.model.eval()
-        self.model.to(self.device)
 
         # Load calibration config
         thresh_path = CALIBRATION / "thresholds.json"
@@ -103,12 +100,10 @@ class FakeNewsPredictor:
             truncation=True,
             padding=True,
         )
-        dummy = {k: v.to(self.device) for k, v in dummy.items()}
-        with torch.no_grad():
-            _ = self.model(**dummy)
+        _ = self.model(**dummy)
 
         self._loaded = True
-        log.info("✓ Model loaded and warmed up")
+        log.info("✓ ONNX model loaded and warmed up")
 
     def _run_inference(self, text: str) -> np.ndarray:
         """Run tokenization + forward pass. Returns raw logits (1D)."""
@@ -119,10 +114,8 @@ class FakeNewsPredictor:
             truncation      = True,
             padding         = True,
         )
-        inputs = {k: v.to(self.device) for k, v in inputs.items()}
-        with torch.no_grad():
-            outputs = self.model(**inputs)
-        return outputs.logits[0].cpu().numpy()
+        outputs = self.model(**inputs)
+        return outputs.logits[0].numpy()
 
     def _calibrate(self, logits: np.ndarray) -> tuple[float, float]:
         """

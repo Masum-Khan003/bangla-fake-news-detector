@@ -35,3 +35,4 @@ aiosqlite==0.22.1
 requests==2.34.2
 tqdm==4.67.3
 packaging==26.2
+optimum[onnxruntime]==1.23.3
